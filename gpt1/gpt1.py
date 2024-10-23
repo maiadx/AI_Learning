@@ -22,7 +22,7 @@ torch.manual_seed(2073)
 print(f"{device} v{torch.version.cuda}")
 print(f"Available GPU mem: {torch.cuda.get_device_properties(0).total_memory}")
 
-with open('gpt1/data/text.txt', encoding='utf-8') as fp:
+with open('gpt1/dataset/text.txt', encoding='utf-8') as fp:
     text = fp.read()
 
 

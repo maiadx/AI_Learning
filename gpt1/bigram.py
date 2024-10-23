@@ -18,7 +18,7 @@ print(device)
 print(torch.version.cuda)
 print(f"Available GPU mem: {torch.cuda.get_device_properties(0).total_memory}")
 
-with open('data/text.txt', encoding='utf-8') as fp:
+with open('gpt1/dataset/text.txt', encoding='utf-8') as fp:
     text = fp.read()
 
 
