@@ -263,7 +263,7 @@ x = torch.randn(B,T,C)
 head_size = 16
 key = nn.Linear(C, head_size, bias=False)
 query = nn.Linear(C, head_size, bias=False)
-
+value = nn.Linear(C, head_size, bias=False)
 
 # k, q emit:
 # lets forward these modules on x.
@@ -282,7 +282,10 @@ tril = torch.tril(torch.ones(T,T))
 #wei = torch.zeros((T,T))
 wei = wei.masked_fill(tril == 0, float('-inf'))
 wei = Func.softmax(wei, dim=-1)
-out = wei @ x
+
+# out = wei @ x
+v = value(x) # makes x private information per token
+out = wei @ v
 
 print(out.shape)
 print(wei[0])
