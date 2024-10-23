@@ -288,6 +288,5 @@ for iter in range(max_iters):
 context = torch.zeros((1, 1), dtype=torch.long, device=device)
 output = decode(m.generate(context, max_new_tokens=500)[0].tolist())
 open('gpt1/gpt1-output.txt', 'w').write(decode(m.generate(context, max_new_tokens=1000)[0].tolist()))
-print("output to file")
 
 # -----------------------------------------------------------------------------------------------------
