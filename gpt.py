@@ -179,7 +179,7 @@ class BigramLanguageModel(nn.Module):
         return idx
 
 
-if True:
+if False:
     model = BigramLanguageModel()
     device_model = model.to(device)
 
@@ -218,7 +218,7 @@ if True:
 # ___________________________________________________________________
 # [Continued from Bigram -- The Mathematical trick in Self-Attention]
 
-B,T,C = 4,8,2
+B,T,C = 4,8,32
 x = torch.randn(B,T,C)
 # print(x.shape)
 
@@ -249,3 +249,40 @@ for b in range(B):
 # we use a mask to fill future values past the present so they don't affect attn
 
 # this lets you do weighted aggregation with lower triangular 
+
+
+
+
+# ___________________________________________________________________
+# Single-Headed Self Attention
+B,T,C = 4,8,32
+
+x = torch.randn(B,T,C)
+
+# lets see a single head perform self-attention:
+head_size = 16
+key = nn.Linear(C, head_size, bias=False)
+query = nn.Linear(C, head_size, bias=False)
+
+
+# k, q emit:
+# lets forward these modules on x.
+
+k = key(x)      # (B, T, 16)
+q = query(x)    # (B, T, 16)
+
+# we want to do a dot product between all queries and all the keys, 
+wei = q @ k.transpose(-2, -1)  # (B, T, 16) @ (B, 16, T) --> (B, T, T)
+
+# ^ we now have  a T^2 matrix for our affinities.
+
+
+
+tril = torch.tril(torch.ones(T,T))
+#wei = torch.zeros((T,T))
+wei = wei.masked_fill(tril == 0, float('-inf'))
+wei = Func.softmax(wei, dim=-1)
+out = wei @ x
+
+print(out.shape)
+print(wei[0])
