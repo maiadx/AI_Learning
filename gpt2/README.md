@@ -1,7 +1,6 @@
 
 We'll reproduce GPT-2 from scratch (124M).
 
-[![IMAGE ALT TEXT](https://youtu.be/l8pRSuU81PU?si=_J0WUWRIduX_9Gan)](https://youtu.be/l8pRSuU81PU?si=_J0WUWRIduX_9Gan)
-
+[![Lecture Video](https://img.youtube.com/vi/l8pRSuU81PU/0.jpg)](https://www.youtube.com/watch?v=l8pRSuU81PU"LectureVideo")
 
 First, let's do a paper reading of "Language Models Are Unsupervised Multitask Learners":
